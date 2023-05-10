@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WristbandPoc_Watch_AppApp: App {
+    @StateObject var audioHapticManager = AudioHapticManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(audioHapticManager)
         }
     }
 }

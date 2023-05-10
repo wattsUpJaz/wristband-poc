@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var audioHapticsManager: AudioHapticManager
+    
+    @State private var isPaused = true
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
+            Image(systemName:
+                audioHapticsManager.isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                .font(.largeTitle)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
+                .onTapGesture {
+                    isPaused = !isPaused
+                    audioHapticsManager.playPause()
+                }
         }
         .padding()
     }
@@ -22,5 +30,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(AudioHapticManager())
     }
 }
